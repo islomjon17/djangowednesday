@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>  
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+
+        {% extends 'events/base.html' %}
+{% block content %}
+
+
+        
+
+<h1> Events </h1>
+    </br>
+    {% for events in event_list %}
+    <div class="card">
+        <div class="card-header">
+            {{ events }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Venue: {{ events.venue }}</h5>
+          <p class="card-text">
+              
+    <ul>
+        <li>Event: {{ events.event_date }}</li>
+      
+        <li>Manage: magerlarni: {{ events.manager }}</li>
+        <li>Desriptions: {{ events.description }}   </li>
+        <li>Attendees:
+        {% for attends in events.attendees.all %}
+ 
+        {{ attends }}
+        {% endfor %}
+    </li>
+    <br/>
+
+    </ul>
+        
+        
+        </p>
+        </div>
+        
+        <div class="card-footer text-muted"> 
+    
+            <a href ="{% url 'update_event' events.id %}" class="btn btn-outline-primary"  >Update</a>
+            {% if user.is_authenticated %}
+        {% if user == event.manager %}
+        
+            <a href ="{% url 'delete_event' events.id %}" class="btn btn-outline-primary"  >Delete</a>
+            {% endif %}
+            {% endif %}
+        </div>
+      
+    </div>
+    <br/>
+    <br/>
+
+<ul>    
+   
+  
+
+
+    {% endfor %}
+
+    
+     
+
+</ul>
+<br/>
+        
+{% endblock  %}
+    
+    </body>
+</html>

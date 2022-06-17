@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>  
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+
+        {% extends 'events/base.html' %}
+{% block content %}
+
+
+        
+<center>
+<h1>Venues....</h1>
+<br/><br/>
+
+{% comment %} 
+{{  venue.name }}<br/>
+{{  venue.zip_code }}<br/>
+{{  venue.phone }}<br/>
+{{  venue.web }}<br/>
+{{  venue.email_adress }}<br/> {% endcomment %}
+
+
+<div class="col-md-12 bg-light text-right">
+    <ul class="col-md-12 bg-light text-right">
+        <button type="button" class="list-group-item list-group-item-action active">
+            Venue data
+          </button>
+        <li class="list-group-item">{{  venue.name }}<br/></li>
+        <li class="list-group-item"{{  venue.zip_code }}<br/></li>
+        <li class="list-group-item">{{  venue.phone }}<br/></li>
+        <li class="list-group-item">{{  venue.web }}<br/></li>
+        <li class="list-group-item">{{  venue.email_adress }}<br/></li>
+    </ul>    
+</div>
+
+
+
+
+
+</center>
+       
+        {% endblock  %}
+    
+    
+    </body>
+</html>

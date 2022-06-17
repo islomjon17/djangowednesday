@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' '2022' 'March' %}">March</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Events
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" aria-current="page" href="{% url 'add_event'  %}">Add event</a>
+            <a class="dropdown-item" aria-current="page" href="{% url 'list-events'  %}">Events</a>
+          </div>
+        </li>
+
+
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'list-events'  %}">Events</a>
+        </li>
+        
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'add_event'  %}">Add event</a>
+        </li> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Venue
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" aria-current="page" href="{% url 'add_venue'  %}">Add venue</a>
+            <a class="dropdown-item" aria-current="page" href="{% url 'venues_list'  %}">Venue</a>
+          </div>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'add_venue'  %}">Add venue</a>
+        </li>
+        
+    
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'venues_list'  %}">Venue</a>
+        </li> -->
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Downloads
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" aria-current="page" href="{% url 'venue_text'  %}">Venue Text File download</a>
+            <a class="dropdown-item" aria-current="page" href="{% url 'venue_csv'  %}">Venue CSV File download</a>
+            <a class="dropdown-item" aria-current="page" href="{% url 'venue_pdf'  %}">Venue PDF File download</a>
+          </div>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'venue_text'  %}">Venue Text File download</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'venue_csv'  %}">Venue CSV File download</a>
+        </li>
+        
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'venue_pdf'  %}">Venue PDF File download</a>
+        </li> -->
+       {% if user.is_authenticated %}
+       
+       <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'logout'  %}">Log out</a>
+      </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'login'  %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'register'  %}">Register</a>
+        </li>
+       {% endif %}
+       
+
+      </ul>
+      <form class="d-flex" role="search" method="POST"  action="{% url 'search_menu'  %}" > {% csrf_token %}
+        
+        <input class="form-control me-2" type="search" placeholder="Search venue" name="searched" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
