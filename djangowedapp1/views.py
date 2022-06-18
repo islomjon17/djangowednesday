@@ -11,7 +11,7 @@ from datetime import datetime
 from .form import VenueForm, EventForm, EventFormAmin
 from django.http import HttpResponse
 import csv
-
+from django.contrib import messages
 # import items reportlab
 
 
@@ -90,8 +90,14 @@ def venue_text(request):
 def delete_event(request, event_id):
     if request.user.is_authenticated:#### whether loged in or not
         event = Event.objects.get(pk=event_id)
-        event.delete()
-        return redirect ('list-events')
+        if request.user == event.manager:
+            event.delete()
+            messages.success(request, ("Event deleted succesfully"))
+            return redirect ('list-events')
+        else:
+            messages.success(request, ("You are not manager"))
+            return redirect ('list-events')     
+        
     else:
         return render(request, "events/eror_401_login.html")
     
