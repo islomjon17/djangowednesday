@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from calendar import HTMLCalendar, month
 from .models import Event, Venue
 from datetime import datetime
-from .form import VenueForm, EventForm
+from .form import VenueForm, EventForm, EventFormAmin
 from django.http import HttpResponse
 import csv
 
@@ -111,12 +111,25 @@ def add_event(request):
     if request.user.is_authenticated:#### whether loged in or not
         submitted=False
         if request.method == 'POST':
-            form = EventForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/add_event?submitted=True')
+            if request.user.is_superuser:
+                form = EventFormAmin(request.POST)
+                if form.is_valid():
+                    form.save()
+                    return HttpResponseRedirect('/add_event?submitted=True')
+            else:
+                form = EventFormAmin(request.POST)
+                if form.is_valid():
+                    # form.save()
+                    event = form.save(commit=False)
+                    event.manager = request.user
+                    event.save()
+
+                    return HttpResponseRedirect('/add_event?submitted=True')
         else:
-            form = EventForm
+            if request.user.is_superuser:
+                form = EventFormAmin
+            else:
+                form = EventForm
             if 'submitted' in  request.GET:
                 submitted=True 
         return render(request, "events/add_event.html", {'form' : form, 'submitted': submitted} )
@@ -157,7 +170,10 @@ def update_venue(request, venue_id):
 def update_event(request, event_id):
 #    if request.user.is_authenticated:#### whether loged in or not
         event = Event.objects.get(pk=event_id)
-        form = EventForm(request.POST or None, instance=event)  
+        if request.user.is_superuser:
+            form = EventForm(request.POST or None, instance=event) 
+        else:
+            form = EventForm(request.POST or None, instance=event)  
         if form.is_valid():
                 form.save()
                 return redirect('list-events')
