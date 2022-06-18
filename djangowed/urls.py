@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import djangowedapp1
+import members
 urlpatterns = [
     path('admin/', admin.site.urls),
     # import django_codemy.urls
     path('', include("djangowedapp1.urls")),
+    path('members/', include("django.contrib.auth.urls")),
+    path('members/', include("members.urls")),
     
 ]
 
