@@ -7,6 +7,8 @@ import calendar
 from django.http import HttpResponseRedirect
 from calendar import HTMLCalendar, month
 from .models import Event, Venue
+#
+from django.contrib.auth.models import User
 from datetime import datetime
 from .form import VenueForm, EventForm, EventFormAmin
 from django.http import HttpResponse
@@ -26,6 +28,23 @@ from reportlab.lib.pagesizes import letter
 from django.core.paginator import Paginator
 
 # Create your views here.
+
+
+
+def my_events(request):
+    if request.user.is_authenticated:#### whether loged in or not
+        return render(request, 'events/my_events.html', {})
+        me = request.user.id
+        events = Evvents.objects.filtera(attendees = me)
+        return render(request, 'events/my_events.html', {'events': events})
+        
+    else:
+        messages.success(request, ("You are not manager"))
+        return redirect ('home ')   
+
+
+
+
 
 
 
@@ -209,8 +228,11 @@ def venues_list(request):
 
 def show_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
+    venue_owner = User.objects.get(pk=venue.owner)
+
     return render(request, "events/show_venue.html", 
-        {'venue':venue})
+        {'venue':venue,
+        'venue_owner' : venue_owner})
     
 
 
