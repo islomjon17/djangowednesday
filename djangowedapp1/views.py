@@ -1,5 +1,6 @@
 from asyncio import events
 from pickle import NONE
+from re import search
 from time import strftime
 from urllib import response
 from django.shortcuts import render, redirect
@@ -33,10 +34,12 @@ from django.core.paginator import Paginator
 
 def my_events(request):
     if request.user.is_authenticated:#### whether loged in or not
-        return render(request, 'events/my_events.html', {})
-        me = request.user.id
-        events = Evvents.objects.filtera(attendees = me)
+        #events = Event.objects.filter(attendees = me)
+        events = Event.objects.all()
         return render(request, 'events/my_events.html', {'events': events})
+        # me = request.user.id
+        # events = Event.objects.filter(attendees = me)
+        # return render(request, 'events/my_events.html', {'events': events})
         
     else:
         messages.success(request, ("You are not manager"))
@@ -176,6 +179,17 @@ def search_menu(request):
 
     else:
         return render(request, 'events/search_venues.html', {})
+
+
+def search_events(request):
+    
+    if request.method == "POST":
+        searched = request.POST['searched']
+        event = Event.objects.filter(name__contains = searched)
+        return render(request, 'events/search_evet.html' , {'searched':searched, 'event':event} )
+
+    else:
+        return render(request, 'events/search_evet.html', {})
 
 
 

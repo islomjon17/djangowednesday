@@ -19,14 +19,56 @@
 {% block content %}
 
 
-        
-<center>
+<center>   
+
     <h1> My Events </h1>
+</center>
     {% for event in events %}
-        {{events}}
+    <div class="card">
+        <div class="card-header">
+            {{ event }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Venue: {{ event.venue }}</h5>
+          <p class="card-text">
+              
+    <ul>
+        <li>Event: {{ event.event_date }}</li>
+      
+        <li>Manage: magerlarni: {{ event.manager }}</li>
+        <li>Desriptions: {{ event.description }}   </li>
+        <li>Attendees:
+        {% for attends in event.attendees.all %}
+    
+        {{ attends }}
+        {% endfor %}
+    </li>
+    <br/>
+    
+    </ul>
+        
+        
+        </p>
+        </div>
+        
+        <div class="card-footer text-muted"> 
+    
+            <a href ="{% url 'update_event' event.id %}" class="btn btn-outline-primary"  >Update</a>
+            {% if user.is_authenticated %}
+        {% if user == event.manager %}
+        
+            <a href ="{% url 'delete_event' event.id %}" class="btn btn-outline-primary"  >Delete</a>
+            {% endif %}
+            {% endif %}
+        </div>
+      
+    </div>
+    <br/>
+    <br/>
+    
 
     {% endfor %}
-</center>
+
         <script src="" async defer></script>
         {% endblock  %}
     
