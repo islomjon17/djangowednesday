@@ -287,6 +287,13 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime("%B"))
     now = datetime.now()
     current_year = now.year
     
+    event_list = Event.objects.filter(
+        event_date__year = datetime.now().year, 
+        event_date__year = datetime.now().year, 
+
+    )
+
+
     # Get current time
     time = now.strftime("%H:%M %p")
     
@@ -299,6 +306,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime("%B"))
             "cal":cal,  
             "current_year":current_year,
             "time":time,
+            "event_list":event_list
             }) 
     
     
