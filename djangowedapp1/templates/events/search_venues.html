@@ -29,7 +29,27 @@
 
 {% for venue  in venues %}
 
-<a href ={% url 'show_venue' venue.id  %} class='btn btn-primary'  >{{ venue }} </a>
+<div class="card">
+    <div class="card-header">
+        Venue
+    </div>
+    <div class="card-body">
+    <h5 class="card-title">{{ venue }}</h5>
+    <p.class="card-text">
+    <ul>
+
+        <li class="list-group-item">{{  venue.name }}<br/></li>
+        <li class="list-group-item">{{  venue.zip_code }}<br/></li>
+        <li class="list-group-item">{{  venue.phone }}<br/></li>
+        <li class="list-group-item"><a href="{{ venue.web }}"> {{ venue.web }} </a><br/></li>
+        <li class="list-group-item">{{  venue.email_adress }}<br/></li>
+        <li class="list-group-item">{{  venue_owner }}<br/></li>
+
+    </ul>
+</p>
+    </div>
+</div>
+{% comment %} <a href ={% url 'show_venue' venue.id  %} class='btn btn-primary'  >{{ venue }} </a> {% endcomment %}
 <br/>
 
 {% endfor %}

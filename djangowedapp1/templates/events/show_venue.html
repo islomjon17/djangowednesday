@@ -32,7 +32,32 @@
 {{  venue.email_adress }}<br/> {% endcomment %}
 
 
-<div class="col-md-12 bg-light text-right">
+
+<div class="card">
+    <div class="card-header">
+        Venue
+    </div>
+    <div class="card-body">
+    <h5 class="card-title">{{ venue }}</h5>
+    <p.class="card-text">
+    <ul>
+
+        <li class="list-group-item">{{  venue.name }}<br/></li>
+        <li class="list-group-item">{{  venue.zip_code }}<br/></li>
+        <li class="list-group-item">{{  venue.phone }}<br/></li>
+        <li class="list-group-item"><a href="{{ venue.web }}"> {{ venue.web }} </a><br/></li>
+        <li class="list-group-item">{{  venue.email_adress }}<br/></li>
+        <li class="list-group-item">{{  venue_owner }}<br/></li>
+
+    </ul>
+</p>
+    </div>
+</div>
+
+
+
+
+{% comment %} <div class="col-md-12 bg-light text-right">
     <ul class="col-md-12 bg-light text-right">
         <button type="button" class="list-group-item list-group-item-action active">
             Venue data
@@ -45,7 +70,7 @@
         <li class="list-group-item">{{  venue_owner }}<br/></li>
     </ul>    
 </div>
-
+ {% endcomment %}
 
 
 
