@@ -34,8 +34,9 @@
               
     <ul>
         <li>Event: {{ events.event_date }}</li>
-      
-        <li>Manage: magerlarni: {{ events.manager }}</li>
+        <li>Days till Event: {{ events.Days_till }}</li>
+        <li>Occured: {{ events.till_past }}</li>
+        <li>Manage: {{ events.manager }}</li>
         <li>Desriptions: {{ events.description }}   </li>
         <li>Attendees:
         {% for attends in events.attendees.all %}
