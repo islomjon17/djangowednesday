@@ -48,8 +48,14 @@
         <li class="list-group-item"><a href="{{ venue.web }}"> {{ venue.web }} </a><br/></li>
         <li class="list-group-item">{{  venue.email_adress }}<br/></li>
         <li class="list-group-item">{{  venue_owner }}<br/></li>
+       
 
     </ul>
+    <br/>
+    {% if venue.image %}
+    <img src="{{ venue.image.url }}" class="rounded float-left" alt="Image">
+
+    {% endif %}
 </p>
     </div>
 </div>

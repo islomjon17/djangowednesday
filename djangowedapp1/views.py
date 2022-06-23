@@ -255,7 +255,7 @@ def add_venue(request):
     if request.user.is_authenticated:#### whether loged in or not
         submitted=False
         if request.method == 'POST':
-            form = VenueForm(request.POST)
+            form = VenueForm(request.POST, request.FILES)
             if form.is_valid():
                 venue = form.save(commit=False)
                 venue.owner = request.user.id
@@ -288,7 +288,6 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime("%B"))
     current_year = now.year
     
     event_list = Event.objects.filter(
-        event_date__year = datetime.now().year, 
         event_date__year = datetime.now().year, 
 
     )

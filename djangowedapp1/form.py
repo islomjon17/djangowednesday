@@ -9,9 +9,10 @@ from .models import Venue, Event
 class VenueForm(ModelForm):
     class Meta:
         model = Venue
-        fields = ['name','address','zip_code', 'phone', 'web', 'email_adress']
+        fields = ['name','address','zip_code', 'phone', 'web', 'email_adress', 'image']
         labels = {
             'name':  '',
+            'image': '',
            'address': ''
             ,'zip_code': ''
             , 'phone':''
@@ -27,7 +28,8 @@ class VenueForm(ModelForm):
             ,'zip_code':forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Zip code'})
             , 'phone':forms.TextInput(attrs={'class':'form-control', 'placeholder': 'phone'})
             , 'web':forms.TextInput(attrs={'class':'form-control', 'placeholder': 'web'})
-            , 'email_adress': forms.EmailInput(attrs={'class':'form-control', 'placeholder': 'Email address'}),
+            , 'email_adress': forms.EmailInput(attrs={'class':'form-control', 'placeholder': 'Email address'})
+           
         }
         
         

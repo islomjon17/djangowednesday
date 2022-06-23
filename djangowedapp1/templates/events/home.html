@@ -31,8 +31,49 @@
     <br/> <br/> <br/>  <br/>  
     
 {% if event_list %}
-{% for event in event_list %}
-{{event}}
+{% for events in event_list %}
+<div class="card">
+    <div class="card-header">
+        {{ events }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Venue: {{ events.venue }}</h5>
+      <p class="card-text">
+          
+<ul>
+    <li>Event: {{ events.event_date }}</li>
+  
+    <li>Manage: magerlarni: {{ events.manager }}</li>
+    <li>Desriptions: {{ events.description }}   </li>
+    <li>Attendees:
+    {% for attends in events.attendees.all %}
+
+    {{ attends }}
+    {% endfor %}
+</li>
+<br/>
+
+</ul>
+    
+    
+    </p>
+    </div>
+    
+    <div class="card-footer text-muted"> 
+
+        <a href ="{% url 'list-events' %}" class="btn btn-outline-primary"  >Go to Events page</a>
+        {% if user.is_authenticated %}
+    {% if user == event.manager %}
+    
+        <a href ="{% url 'delete_event' events.id %}" class="btn btn-outline-primary"  >Delete</a>
+        {% endif %}
+        {% endif %}
+    </div>
+  
+</div>
+<br/>
+<br/>
+
 {% endfor %}
 <p>  Thera are no event in page  </p>
 {% else %}

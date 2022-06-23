@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 import djangowedapp1
 import members
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # import django_codemy.urls
@@ -24,7 +28,7 @@ urlpatterns = [
     path('members/', include("django.contrib.auth.urls")),
     path('members/', include("members.urls")),
     
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
  
 admin.site.site_header = 'Kebab Dev Administration Page'                    

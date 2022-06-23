@@ -10,7 +10,7 @@ class Venue(models.Model):
     web = models.URLField("Website address")
     email_adress = models.EmailField("Email", max_length=254)
     owner = models.IntegerField("Venue owner", blank=False,default=1)
-    
+    image = models.ImageField(null=True, blank=True, upload_to='images/')
     
     
     def __str__(self):
