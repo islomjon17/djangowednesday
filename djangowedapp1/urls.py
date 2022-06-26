@@ -22,6 +22,7 @@ urlpatterns = [
     path('my_events', my_events, name="my_events"),
     path('search_events',search_events, name="search_events"),
     path('admin_approverd',admin_approverd, name="admin_approverd"),
+    path('venue_events/<venue_id>', venue_events, name='venue_events'),
 ]
 
 
