@@ -32,6 +32,10 @@ from django.core.paginator import Paginator
 
 
 def admin_approverd(request):
+    event_count = Event.objects.all().count()
+    venue_count = Venue.objects.all().count()
+    user_count = User.objects.all().count() 
+
     events = Event.objects.all().order_by('event_date')
     if request.user.is_superuser:
         if request.method == 'POST':
@@ -43,7 +47,13 @@ def admin_approverd(request):
             messages.success(request, ("Done succesfully"))
             return redirect ('home')
         else:
-            return render(request, "events/admin_approverd.html", {"events":events})
+            return render(request, "events/admin_approverd.html",
+             {
+            "events":events,
+            "event_count":event_count,
+            "venue_count":venue_count,
+            "user_count":user_count
+            })
     else:
         messages.success(request, ("You are not manager"))
         return redirect ('home')
