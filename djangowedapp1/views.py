@@ -34,13 +34,19 @@ from django.core.paginator import Paginator
 def admin_approverd(request):
     events = Event.objects.all().order_by('event_date')
     if request.user.is_superuser:
-        
-        return render(request, "events/admin_approverd.html", {"events":events})
+        if request.method == 'POST':
+            # get model id
+            id_request = request.POST.getlist('boxes')
+            # update model
+            for x in id_request:
+                Event.objects.filter(pk=x).update(approved=True)
+            messages.success(request, ("Done succesfully"))
+            return redirect ('home')
+        else:
+            return render(request, "events/admin_approverd.html", {"events":events})
     else:
         messages.success(request, ("You are not manager"))
         return redirect ('home')
-
-
 
 
 
