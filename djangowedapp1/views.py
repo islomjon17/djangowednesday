@@ -31,6 +31,20 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 
+def admin_approverd(request):
+    events = Event.objects.all().order_by('event_date')
+    if request.user.is_superuser:
+        
+        return render(request, "events/admin_approverd.html", {"events":events})
+    else:
+        messages.success(request, ("You are not manager"))
+        return redirect ('home')
+
+
+
+
+
+
 
 def my_events(request):
     if request.user.is_authenticated:#### whether loged in or not
@@ -372,5 +386,6 @@ def pdf_venue(request):
     else:
         return render(request, "events/eror_401_login.html")
     
+
 
 

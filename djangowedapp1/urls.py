@@ -21,4 +21,7 @@ urlpatterns = [
     path('venue_pdf', pdf_venue, name="venue_pdf"),
     path('my_events', my_events, name="my_events"),
     path('search_events',search_events, name="search_events"),
+    path('admin_approverd',admin_approverd, name="admin_approverd"),
 ]
+
+
