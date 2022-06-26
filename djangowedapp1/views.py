@@ -38,7 +38,7 @@ def venue_events(request, venue_id):
     if events_list:
         return render(request, 'events/venue_events.html', {"events_list":events_list})
     else:
-        messages.success(request, ("That venue has not event at this time..."))
+        messages.success(request, ("That Venue Has No Event At This Time..."))
         return redirect('home')
 
 
@@ -274,10 +274,12 @@ def venues_list(request):
 def show_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
     venue_owner = User.objects.get(pk=venue.owner)
+    events = venue.event_set.all()
 
     return render(request, "events/show_venue.html",
                   {'venue': venue,
-                   'venue_owner': venue_owner})
+                   'venue_owner': venue_owner,
+                   "events":events})
 
 
 def add_venue(request):

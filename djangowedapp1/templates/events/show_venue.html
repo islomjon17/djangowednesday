@@ -57,6 +57,17 @@
 
     {% endif %}
 </p>
+<br/>
+<br/>
+
+{% for event in events %}
+
+
+<a href ="{% url 'venue_events' venue.id %}" class="btn btn-outline-primary"  >{{ event.name }}</a>
+     
+
+{% endfor %}
+
     </div>
 </div>
 
